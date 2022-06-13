@@ -106,7 +106,7 @@ public class Game {
             System.out.println ("You haven't played yet!");
           else{
             userStats.clear();
-            System.out.println("stats have been reset:" + userStats);
+            System.out.println("current stats have been reset:" + userStats);
           }
            clear = true;
           break;
@@ -121,7 +121,14 @@ public class Game {
             LeaderboardState state = new LeaderboardState();
             state.leaderboard = userStats;
             state.save();
+           
           }
+            
+          else{
+            LeaderboardState state = new LeaderboardState();
+            state.delete();
+            }
+            
           return;
           
         default:
