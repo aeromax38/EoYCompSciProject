@@ -33,7 +33,9 @@ public class Game {
   private String userName; // Current user playing the game
   private int sides; // Sides of dice
   private int guess; // User guesses
-  private boolean clear = false;
+  private boolean clear = false; // for clear command
+  private boolean clearaction = false; //for clear command
+  
   public Game() {
     LeaderboardState state = LeaderboardState.restore();
     if (state == null)
@@ -45,11 +47,13 @@ public class Game {
   public void play() {
     System.out.println("\nWelcome to Dice Guesser! If this is your first game, please enter \"rules\"!"); // add intro letter here
     while (true) {
-      String command = Utils.inputStr("\nOptions:\nplay: starts the game \nleaderboard: shows score of all current players \nstats: gives your stats \nclear: clears leaderboard \nrules: explains the scoring system and instructions of the game \nquit: ends game \nWhat do you want to do? ");
+      String command = Utils.inputStr("\nOptions:\nplay: starts the game \nleaderboard: shows score of all current players \nclear: clears leaderboard \nrules: explains the scoring system and instructions of the game \nquit: ends game \nWhat do you want to do? ");
     
       switch (command) {  
           
         case "play": // Play the game
+          clear=false;
+          clearaction=false;
           userName = Utils.inputStr ("Welcome to Dice Guesser. Please enter your username: ");
           if (userStats.containsKey(userName)){
             System.out.println("Welcome back! Your highscore was " + userStats.get(userName));
@@ -84,31 +88,24 @@ public class Game {
           break;
           
         case "leaderboard": // Prints leaderboard
-        /*
-          if (userName == null || userStats.get(userName) == null)
+          if (clear == true)
             System.out.println ("You haven't played yet!"); 
-          else */
-          for(String name: userStats.keySet()){
+          else
+            for(String name: userStats.keySet()){
             int score = userStats.get(name);
             System.out.println(name + ": " + score);
           }
           break;
-
-        case "stats": // Prints current user's highscore for current session
-          if (userName == null || userStats.get(userName) == null)
-            System.out.println ("You haven't played yet!");
-          else
-            System.out.println("Your highscore is: " + userStats.get(userName));
-          break;
           
         case "clear": // Reset leaderboard
-          if (userName == null || userStats.get(userName) == null)
-            System.out.println ("You haven't played yet!");
-          else{
-            userStats.clear();
-            System.out.println("stats have been reset:" + userStats);
+          userStats.clear();
+          System.out.println("Stats have been reset.");
+          clear = true;
+          clearaction = true;
+          if(clearaction==true){
+            LeaderboardState state = new LeaderboardState();
+            state.delete();
           }
-           clear = true;
           break;
           
         case "rules": // Rules of the game
@@ -122,6 +119,8 @@ public class Game {
             state.leaderboard = userStats;
             state.save();
           }
+          clear=false;
+          clearaction=false;
           return;
           
         default:
