@@ -108,6 +108,8 @@ public class Game {
             userStats.clear();
             System.out.println("stats have been reset:" + userStats);
           }
+          LeaderboardState state1 = new LeaderboardState();
+          state1.delete();
           break;
           
         case "rules": // Rules of the game
@@ -119,7 +121,8 @@ public class Game {
           LeaderboardState state = new LeaderboardState();
           state.leaderboard = userStats;
           state.save();
-          break;
+          return;
+          
           
         default: 
           System.out.println("Please choose an option.");

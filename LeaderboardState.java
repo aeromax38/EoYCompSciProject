@@ -31,7 +31,7 @@ public class LeaderboardState implements Serializable {
     try {
       FileOutputStream fos = new FileOutputStream(fileName);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
-      oos.writeObject(this);
+      oos.reset();
       oos.close();
       fos.close();
       return true;
