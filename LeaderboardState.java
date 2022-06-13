@@ -27,6 +27,19 @@ public class LeaderboardState implements Serializable {
       return false;
     }
   }
+   public boolean delete() {
+    try {
+      FileOutputStream fos = new FileOutputStream(fileName);
+      ObjectOutputStream oos = new ObjectOutputStream(fos);
+      oos.writeObject(this);
+      oos.close();
+      fos.close();
+      return true;
+    } catch (IOException e) {
+      System.err.println(e);
+      return false;
+    }
+  }
 
   public static LeaderboardState restore () {
     try {
