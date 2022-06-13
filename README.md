@@ -15,3 +15,4 @@ Changelog:
 5/23: Validating user input with no error messages
 6/2: New startup instructions & better-looking leaderboard
 6/9: Implemented serialization with persistent leaderboard & code simplification
+6/12: Fixed "clear" command to persist between sessions
