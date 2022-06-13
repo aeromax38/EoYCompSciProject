@@ -119,7 +119,7 @@ public class Game {
           LeaderboardState state = new LeaderboardState();
           state.leaderboard = userStats;
           state.save();
-          return;
+          break;
           
         default: 
           System.out.println("Please choose an option.");
