@@ -96,7 +96,7 @@ public class Game {
 
         case "stats": // Prints current user's highscore for current session
           if (userName == null || userStats.get(userName) == null)
-            System.out.println ("You haven't played yet!");
+            System.out.println ("You haven't played yet this round. Click quit to see past games leaderboard reset");
           else
             System.out.println("Your highscore is: " + userStats.get(userName));
           break;
