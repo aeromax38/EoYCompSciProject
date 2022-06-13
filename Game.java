@@ -33,7 +33,7 @@ public class Game {
   private String userName; // Current user playing the game
   private int sides; // Sides of dice
   private int guess; // User guesses
-private boolean clear;
+  private boolean clear = false;
   public Game() {
     LeaderboardState state = LeaderboardState.restore();
     if (state == null)
@@ -108,8 +108,7 @@ private boolean clear;
             userStats.clear();
             System.out.println("stats have been reset:" + userStats);
           }
-          
-           clear = false;
+           clear = true;
           break;
           
         case "rules": // Rules of the game
@@ -117,20 +116,15 @@ private boolean clear;
           break;
           
         case "quit": // Quit
-          
-          if(clear){
           System.out.println ("Thanks for playing!");
+          if(clear==false){
             LeaderboardState state = new LeaderboardState();
-          state.leaderboard = userStats;
-          state.save();
-          }
-          else{
-            System.out.println ("Thanks for playing!");
+            state.leaderboard = userStats;
+            state.save();
           }
           return;
           
-          
-        default: 
+        default:
           System.out.println("Please choose an option.");
           break;
       }
